@@ -1,3 +1,20 @@
+\documentclass[final,3p,times,twocolumn]{elsarticle}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{atlasphysics} 
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{subfigure}
+\usepackage{rotating}
+\usepackage{wasysym}
+
+\journal{Physics Letters B}
+\renewcommand*{\today}{August 31, 2012}
+
+\usepackage{preprintcover}  % load package
+\PreprintCoverPaperTitle{\papertitle}  % paper title
+\PreprintIdNumber{CERN-PH-EP-2012-218}  % CERN preprint number
 \PreprintCoverAbstract{A 
   search for the Standard Model Higgs boson in
   proton-proton collisions with the ATLAS detector at the LHC is
@@ -14,9 +31,262 @@
   corresponding to a background fluctuation probability of $1.7\times 10^{-9}$, 
   is compatible with the production and decay of the Standard Model Higgs boson. 
 }  % paper abstract
+\PreprintJournalName{Physics Letters B}  % journal name
+% --------------------
+
+
+
+ % HWWlvlvPaper_Defs.tex
+
+\newcommand{\UPD}{**UPDATE** }
+\newcommand{\hwwlumi}{5.8}
+\newcommand{\metrel}{\ensuremath{E_{\rm T,rel}^{\rm miss}}}
+\newcommand{\mT}{\ensuremath{m_{\rm T}}}
+\newcommand{\pTll}{\ensuremath{p_{\rm T}^{\ell\ell}}}
+\newcommand{\ptll}{\pTll}
+\newcommand{\vpTll}{\ensuremath{{\bf p}_{\rm T}^{\ell\ell}}}
+\newcommand{\dR}{\ensuremath{\Delta R}}
+\newcommand{\pTtot}{\ensuremath{{\bf p}_{\rm T}^{\rm tot}}\xspace}
+\newcommand{\njets}{\ensuremath{N_{\rm jets}}}
+\newcommand{\lelm}{\ensuremath{H{\rightarrow\,}WW^{(\ast)}{\rightarrow\,}e \nu \mu \nu}}
+\newcommand{\wwlnln}{\ensuremath{WW^{(\ast)}{\rightarrow\,}\ell\nu\ell\nu}}
+\newcommand{\ZeroJet}{\mbox{0-jet}}
+\newcommand{\OneJet}{\mbox{1-jet}}
+\newcommand{\TwoJet}{\mbox{2-jet}}
+\newcommand{\Wg}{\ensuremath{W\gamma^{(\ast)}}}
+\def\MPT{\ensuremath{p_{\mathrm{T}}^{\mathrm{miss}}}}
+\def\MPTRel{\ensuremath{p_{\mathrm{T, Rel}}^{\mathrm{miss}}}}
+\newcommand{\hwwmll}{\ensuremath{m_{\ell\ell}}}
+
+\def\WWSFzerojet{\ensuremath{1.06 \pm 0.06}} 
+\def\WWSFonejet{\ensuremath{0.99 \pm 0.15}}
+
+\def\TopSFzerojet{\ensuremath{1.11 \pm  0.06}}
+\def\TopSFonejet{\ensuremath{1.11 \pm  0.05}}
+\def\TopSFtwojet{\ensuremath{1.01 \pm  0.26}}
+
+\def\Minpzero{\ensuremath{6 \times 10^{-4}}}
+\def\Minpzerosigma{\ensuremath{3.2}}
+
+\def\Nompzero{\ensuremath{8 \times 10^{-4}}}
+\def\Nompzerosigma{\ensuremath{3.1}}
+
+\def\NompzeroExp{\ensuremath{0.05}}
+\def\NompzerosigmaExp{\ensuremath{1.6}}
+
+\def\NompzeroCut{\ensuremath{2 \times 10^{-3}}}
+\def\NompzerosigmaCut{\ensuremath{3.0}}
+
+\def\NompzeroExpCut{\ensuremath{0.07}}
+\def\NompzerosigmaExpCut{\ensuremath{1.5}}
+
+\def\Nommu{\ensuremath{2.1^{+0.8}_{-0.7}}}
+\def\NommuNoError{\ensuremath{2.1}}
+
+\def\NommuOld{\ensuremath{0.5 \pm 0.7}} 
+\def\DiffMuNewOld{\ensuremath{1.5}} 
+
+\def\MinpzeroComb{\ensuremath{3 \times 10^{-3}}}
+\def\MinpzerosigmaComb{\ensuremath{2.8}}
+
+\def\NompzeroExpComb{\ensuremath{0.01}}
+\def\NompzerosigmaExpComb{\ensuremath{2.3}}
+
+\def\NommuComb{\ensuremath{1.4 \pm 0.5}}
+
+\def\CLexplow{\ensuremath{129}}
+\def\CLobslow{\ensuremath{145}}
+
+\def\CLexplowComb{\ensuremath{124}}
+\def\CLobslowComb{\ensuremath{137}}
+
+\def\threesigmaregion{\ensuremath{110-130}}
+
+\def\TrackMETCut{\ensuremath{30}}
+\def\CaloMETCut{\ensuremath{45}}
+\def\CaloMETCutem{\ensuremath{25}}
+\def\VBFCaloMETCutem{\ensuremath{20}}
+\def\IsoCutRange{0.12-0.20}
+\def\IsoConeSize{\ensuremath{0.3}}
+\def\JVFCut{\ensuremath{0.5}}
+\def\btagWP{\ensuremath{85\%}}
+
+\def\WWSRErrorZerojet{\ensuremath{13\%}}
+\def\WWSRErrorOnejet{\ensuremath{42\%}}
+\def\TopSRErrorZerojet{\ensuremath{17\%}}
+\def\TopSRErrorOnejet{\ensuremath{36\%}}
+\def\TopSRErrorTwojet{\ensuremath{70\%}}
+\def\WjetsSRError{\ensuremath{50\%}}
+\def\WjetsSRErrorEle{\ensuremath{40\%}}
+\def\WjetsSRErrorMu{\ensuremath{60\%}}
+
+
+\newcommand{\atlasnote}[1]{\def\@atlasnote{#1}}
+\newcommand{\lumi}{$\mathcal{L}$}
+\newcommand{\mgg}{\ensuremath{m_{\gamma\gamma}}\xspace}
+
+\newcommand{\Amumu}{\ensuremath{h/H/A \rightarrow \mu^{+}\mu^{-}}}
+\newcommand{\emu}{\ensuremath{e^{\pm}\mu^{\mp}}}
+\newcommand{\mup}{\ensuremath{\mu^{+}}}
+\newcommand{\mum}{\ensuremath{\mu^{-}}}
+\newcommand{\fb}{\ensuremath{\,\mbox{fb}}}
+\newcommand{\mm}{\ensuremath{\,\mbox{mm}}}
+\newcommand{\bbA}{\ensuremath{b\bar{b}A}}
+
+\newcommand{\bb}{\ensuremath{b\bar{b}}}
+\newcommand{\ggF}{\ensuremath{gg\to H}}
+\newcommand{\VBF}{\ensuremath{qq'\to qq'H}}
+\newcommand{\VH}{\ensuremath{q\bar{q}\to WH/ZH}}
+\newcommand{\ttH}{\ensuremath{q\bar{q}/gg \to t\bar{t}H}}
+\newcommand{\ggttH}{\ensuremath{gg \to t\bar{t}H}}
+\newcommand{\Zgjets}{$Z/\gamma^{*}$+jets}
+\newcommand{\Zjets}{$Z$+jets}
+\newcommand{\mll}{$m_{\ell\ell}$}
+\newcommand{\dphill}{$\Delta\phi_{\ell\ell}$}
+
+\newcommand{\ptt}{\ensuremath{p_{\mathrm{Tt}}}}
+\newcommand{\hgg}{\ensuremath{H{\rightarrow\,}\gamma\gamma}}
+\newcommand{\hww}{\ensuremath{H \rightarrow WW^{(*)}}}
+\newcommand{\ggWW}{\ensuremath{gg{\rightarrow\,}WW}}
+\newcommand{\hWWlnln}{\ensuremath{H{\rightarrow\,}WW^{(*)}{\rightarrow\,}\ell\nu\ell\nu}}
+\newcommand{\hWWlvlv}{\ensuremath{H{\rightarrow\,}WW^{(*)}{\rightarrow\,}\ell\nu\ell\nu}}
+\newcommand{\hwwlnln}{\ensuremath{H{\rightarrow\,}WW^{(*)}{\rightarrow\,}\ell\nu\ell\nu}}
+
+\newcommand{\hWWenmun}{\ensuremath{H{\rightarrow\,}WW^{(*)}{\rightarrow\,}e\nu\mu\nu}}
+\newcommand{\hWWevmuv}{\ensuremath{H{\rightarrow\,}WW^{(*)}{\rightarrow\,}e\nu\mu\nu}}
+\newcommand{\hwwenmun}{\ensuremath{H{\rightarrow\,}WW^{(*)}{\rightarrow\,}e\nu\mu\nu}}
+
+\newcommand{\lnln}{\ensuremath{\ell\nu\ell\nu}}
+\newcommand{\enmun}{\ensuremath{e\nu\mu\nu}}
+
+\newcommand{\hWWlnqq}{\ensuremath{H \rightarrow WW \rightarrow \ell\nu q\overline{q}'}}
+\newcommand{\lnqq}{\ensuremath{\ell\nu q\overline{q}'}}
+\newcommand{\hzz}{\ensuremath{H \rightarrow ZZ^{(*)}}}
+\newcommand{\hZZ}{\ensuremath{H \rightarrow ZZ}}
+\newcommand{\hZZllnn}{\ensuremath{H \rightarrow ZZ\rightarrow \ell^+\ell^-\nu\overline{\nu}}}
+\newcommand{\hZZllqq}{\ensuremath{H \rightarrow ZZ\rightarrow \ell^+\ell^- q\overline{q}}}
+\newcommand{\hZZllll}{\ensuremath{H{\rightarrow\,}ZZ^{(*)}{\rightarrow\,}4\ell}}
+\newcommand{\hzzllnn}{\ensuremath{H \rightarrow ZZ\rightarrow \ell^+\ell^-\nu\overline{\nu}}}
+\newcommand{\hzzllqq}{\ensuremath{H \rightarrow ZZ\rightarrow \ell^+\ell^- q\overline{q}}}
+\newcommand{\hzzllll}{\ensuremath{H \rightarrow ZZ^{(*)}\rightarrow 4\ell}}
+\newcommand{\htt}{\ensuremath{H \rightarrow \tau^+\tau^-}}
+\newcommand{\hbb}{\ensuremath{H \rightarrow \bb}}
+\newcommand{\llnn}{\ensuremath{\ell^+\ell^-\nu\bar{\nu}}}
+\newcommand{\hllnn}{\ensuremath{H \rightarrow ZZ \rightarrow \llnn}}
+\newcommand{\zzllnn}{\ensuremath{ZZ \rightarrow \llnn}}
+\newcommand{\llll}{\ensuremath{\ell^+\ell^-\ell^+\ell^-}}
+\newcommand{\hllll}{\ensuremath{H{\rightarrow\,}ZZ^{(*)}{\rightarrow\,}\llll}}
+\newcommand{\llbb}{\ensuremath{\ell^+\ell^-b\bar{b}}}
+\newcommand{\lvbb}{\ensuremath{\ell\nu b\bar{b}}}
+\newcommand{\wbb}{\ensuremath{Wb\bar{b}}}
+\newcommand{\Zbb}{\ensuremath{Zb\bar{b}}}
+\newcommand{\Zjj}{\ensuremath{Zq\bar{q}}}
+\newcommand{\hllbb}{\ensuremath{H \rightarrow ZZ \rightarrow \llbb}}
+\newcommand{\heenn}{\ensuremath{H \rightarrow ZZ \rightarrow e^+e^-\nu\bar{\nu}}}
+\newcommand{\hmmnn}{\ensuremath{H \rightarrow ZZ \rightarrow \mu^+\mu^-\nu\bar{\nu}}}
+\newcommand{\mh}{\ensuremath{m_{H}}}
+\newcommand{\ztoll}{\ensuremath{Z{\rightarrow\,}\ell^+\ell^-}}
+\newcommand{\ztoee}{\ensuremath{Z{\rightarrow\,}e^+e^-}}
+\newcommand\tthbb{\ensuremath{t\overline{t}}\hbb}
+\newcommand\htollbb{\hllbb}
+\newcommand\htollnunu{\hllnn}
+\newcommand\zztollnunu{\zzllnn}
+\newcommand\htollll{$H{\rightarrow\,}ZZ^{(*)}{\rightarrow\,}4\ell$}
+\newcommand{\htoeenunu}{\heenn}
+\newcommand{\htomumununu}{\hmmnn}
+\newcommand{\lumiuncertainty}{$\pm3.7$\%}
+\newcommand{\lhood}{\ensuremath{{\cal L}}}
+\newcommand{\gaussprob}{\ensuremath{\textrm{Norm}(\delta_i|\bar{\delta}_i)}}
+\newcommand{\nuisance}{\ensuremath{m_{\delta_i}}}
+\newcommand{\ZZbkg}{\ensuremath{ZZ^{(*)}}}
+\newcommand{\zz}{\ensuremath{ZZ}}
+\newcommand{\ww}{\ensuremath{WW}}
+\newcommand{\wz}{\ensuremath{WZ}}
+\newcommand{\Wjets}{$W$+jets}
+\newcommand{\SM}{Standard Model}
+\newcommand{\httlh}{\ensuremath{H\rightarrow \tau\tau \rightarrow \ell \tau_{had} 3 \nu }}
+\newcommand{\httllj}{\ensuremath{H\rightarrow \tau\tau \rightarrow \ell^+\ell^-4\nu }}
+\newcommand{\lh}{\ensuremath{\ell\tau_{had} 3 \nu}}
+\newcommand{\llj}{\ensuremath{\tau_{\ell} \tau_{\ell} + jet}}
+\newcommand{\ttoWb}{t{\rightarrow\,}Wb}
+
+\newcommand\htollvv{$H\to ZZ\to\ell^+\ell^-\nu\bar{\nu}$\ }
+\newcommand\htollqq{$H\to ZZ\to\ell^+\ell^- q \bar{q}$\ }
+\newcommand\htoeevv{$H\to ZZ\to ee\nu\nu$\ }
+\newcommand\htoeeqq{$H\to ZZ\to eeq \bar{q}$\ }
+\newcommand\htouuvv{$H\to ZZ\to\mu\mu\nu\nu$\ }
+\newcommand\htouuqq{$H\to ZZ\to\mu\mu q \bar{q}$\ }
+\newcommand{\inpb}{pb$^{-1}$}
+\newcommand{\infb}{fb$^{-1}$}
+
+\def\vec#1{{\mbox{$\boldsymbol{#1}$}}}
+
+\renewcommand{\ttbar}{\ensuremath{t\overline{t}}}
+
+ % resultcommands.tex
+
+\newcommand{\lowerExpNoGeV}{110}
+\newcommand{\lowerExp}{\lowerExpNoGeV\,GeV}
+\newcommand{\upperExpNoGeV}{582}
+\newcommand{\upperExp}{\upperExpNoGeV\,GeV}
+
+\newcommand{\lowerlowerObsNoGeV}{111}
+\newcommand{\lowerlowerObs}{\lowerlowerObsNoGeV\,GeV}
+
+\newcommand{\upperlowerObsNoGeV}{122} 
+\newcommand{\upperlowerObs}{\upperlowerObsNoGeV\,GeV}
+
+\newcommand{\lowerObsNoGeV}{131}
+\newcommand{\lowerObs}{\lowerObsNoGeV\,GeV}
+\newcommand{\upperObsNoGeV}{559}
+\newcommand{\upperObs}{\upperObsNoGeV\,GeV}
+
+\newcommand{\significance}{$6.0\,\sigma$}
+\newcommand{\expectedsignificance}{$4.9\,\sigma$}
+\newcommand{\significanceESS}{$5.9\,\sigma$}
+
+\newcommand{\lowerlowernintynineobsNoGeV}{1xx}
+\newcommand{\upperlowernintynineobsNoGeV}{1yy}
+\newcommand{\lowernintynineobsNoGeV}{1xy}
+\newcommand{\upernintynineobsNoGeV}{5xy}
+\newcommand{\lowerlowernintynineobs}{\lowerlowernintynineobsNoGeV\,GeV}
+\newcommand{\upperlowernintynineobs}{\upperlowernintynineobsNoGeV\,GeV}
+\newcommand{\lowernintynineobs}{\lowernintynineobsNoGeV\,GeV}
+\newcommand{\upernintynineobs}{\upernintynineobsNoGeV\,GeV}
+
+\newcommand{\lowernintynineexpNoGeV}{yyy1}
+\newcommand{\upernintynineexpNoGeV}{yyy2}
+\newcommand{\lowernintynineexp}{\lowernintynineexpNoGeV\,GeV}
+\newcommand{\upernintynineexp}{\upernintynineexpNoGeV\,GeV}
+
+\newcommand{\masspeak}{126.0}
+\newcommand{\massresult}{\masspeak\pm 0.6~\mathrm{GeV}}
+\newcommand{\massresultStatSys}{\mbox{\ensuremath{\masspeak \; \pm 0.4 \;\textrm{(stat)} \; \pm 0.4\; \textrm{(sys)}~\mathrm{GeV}}}}
+
+
+
+\usepackage{amssymb}
+
+\usepackage{lineno}
+\usepackage{chngpage}
+
+\biboptions{numbers,square,comma,sort&compress}
+
+\hyphenation{ATLAS}
+
+\usepackage{hypernat}
+\usepackage{hyperref}
 
 \newcommand{\papertitle}{Observation of a New Particle in the Search for
   the Standard Model Higgs Boson with the ATLAS Detector at the LHC}
+
+% --------------------
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{\papertitle}
 
 \author{The ATLAS Collaboration\\ \vspace{1cm} This paper is dedicated to the memory of our ATLAS 
 colleagues who did not live to see the full impact and significance of their
