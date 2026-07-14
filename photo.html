@@ -6,76 +6,55 @@
     <title>Photography Portfolio</title>
     <style>
         /* Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: system-ui, -apple-system, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            line-height: 1.6;
+            background-color: #121212; color: #ffffff; line-height: 1.6;
         }
         
         /* Header */
-        header {
-            text-align: center;
-            padding: 4rem 2rem 2rem;
-        }
-        h1 {
-            font-weight: 300;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-        p {
-            color: #888;
-        }
+        header { text-align: center; padding: 4rem 2rem 2rem; }
+        h1 { font-weight: 300; letter-spacing: 0.1em; text-transform: uppercase; font-size: 2rem; margin-bottom: 0.5rem; }
+        p { color: #888; }
 
-        /* True Masonry Gallery (Preserves Aspect Ratios) */
+        /* True Masonry Gallery */
         .gallery {
-            column-count: 3;
-            column-gap: 1.5rem;
-            padding: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
+            column-count: 3; column-gap: 1.5rem; padding: 2rem;
+            max-width: 1400px; margin: 0 auto;
         }
-
-        /* Responsive columns for smaller screens */
-        @media (max-width: 900px) {
-            .gallery {
-                column-count: 2;
-            }
-        }
-        @media (max-width: 600px) {
-            .gallery {
-                column-count: 1;
-            }
-        }
+        @media (max-width: 900px) { .gallery { column-count: 2; } }
+        @media (max-width: 600px) { .gallery { column-count: 1; } }
 
         /* Image Styling */
         .gallery-item {
-            break-inside: avoid; /* Prevents an image from being split across columns */
-            margin-bottom: 1.5rem;
-            border-radius: 4px;
-            background-color: #1e1e1e;
-            overflow: hidden;
+            break-inside: avoid; margin-bottom: 1.5rem;
+            border-radius: 4px; background-color: #1e1e1e; overflow: hidden;
         }
-        
         .gallery-item img {
-            width: 100%;
-            height: auto; /* Allows the image to keep its original aspect ratio */
-            display: block;
+            width: 100%; height: auto; display: block;
             transition: transform 0.4s ease, opacity 0.4s ease;
         }
-        
         .gallery-item:hover img {
-            transform: scale(1.03);
-            opacity: 0.9;
-            cursor: pointer;
+            transform: scale(1.03); opacity: 0.9; cursor: zoom-in;
         }
+
+        /* Lightbox (Full Screen Viewer) Styles */
+        .lightbox {
+            display: none; position: fixed; z-index: 999;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            justify-content: center; align-items: center;
+        }
+        .lightbox img {
+            max-width: 95vw; max-height: 95vh;
+            object-fit: contain; border-radius: 4px;
+        }
+        .lightbox-close {
+            position: absolute; top: 20px; right: 40px;
+            color: #ccc; font-size: 50px; cursor: pointer;
+            transition: color 0.2s;
+        }
+        .lightbox-close:hover { color: #fff; }
     </style>
 </head>
 <body>
@@ -84,35 +63,38 @@
         <h1>Photography</h1>
         <p>Selected Works</p>
     </header>
-<main class="gallery">
-        <div class="gallery-item">
-            <img src="files/images/photo1.jpeg" alt="Photo1" title="Photo1">
-        </div>
-        <div class="gallery-item">
-            <img src="files/images/photo2.jpeg" alt="Photo2" title="Photo2">
-        </div>
-        <div class="gallery-item">
-            <img src="files/images/photo3.jpeg" alt="Photo3" title="Photo3">
-        </div>
-        <div class="gallery-item">
-            <img src="files/images/photo4.jpeg" alt="Photo4" title="Photo4">
-        </div>
-        <div class="gallery-item">
-            <img src="files/images/photo5.jpeg" alt="Photo5" title="Photo5">
-        </div>
-        <div class="gallery-item">
-            <img src="files/images/photo6.jpeg" alt="Photo6" title="Photo6">
-        </div>
-        <div class="gallery-item">
-            <img src="files/images/shutterstock_2306088965-e1757112807302_04272026114004.webp" alt="Shutterstock 2306088965 E1757112807302 04272026114004" title="Shutterstock 2306088965 E1757112807302 04272026114004">
-        </div>
-        <div class="gallery-item">
-            <img src="files/images/1778201991994-1778201613150-c66abfc2-4c16-4f8f-8033-4cae04062f21-IMG_8831.webp" alt="oxford dic" title="oxford dic">
-        </div>
-        <div class="gallery-item">
-            <img src="files/images/1778201999424-1778201612275-533fd7f8-491b-4988-b0a0-efca117f00ff-IMG_8823.webp" alt="sleeping dog" title="sleeping dog">
-        </div>
+
+    <main class="gallery">
+        <!-- The Python script will insert your thumbnails here -->
     </main>
+
+    <!-- The Lightbox Overlay -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Full Resolution Image">
+    </div>
+
+    <script>
+        function openLightbox(imgElement) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            // Grabs the high-res path from the data attribute
+            lightboxImg.src = imgElement.getAttribute('data-fullres');
+            lightbox.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+            document.getElementById('lightbox-img').src = '';
+        }
+
+        // Close lightbox when hitting the Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                closeLightbox();
+            }
+        });
+    </script>
 
 </body>
 </html>
