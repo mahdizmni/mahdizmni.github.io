@@ -13,7 +13,7 @@
         }
         body {
             font-family: system-ui, -apple-system, sans-serif;
-            background-color: #121212; /* Dark theme makes photos pop */
+            background-color: #121212;
             color: #ffffff;
             line-height: 1.6;
         }
@@ -34,30 +34,43 @@
             color: #888;
         }
 
-        /* Gallery Grid */
+        /* True Masonry Gallery (Preserves Aspect Ratios) */
         .gallery {
-            display: grid;
-            /* Creates a responsive grid: minimum 300px width, fills available space */
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            column-count: 3;
+            column-gap: 1.5rem;
             padding: 2rem;
             max-width: 1400px;
             margin: 0 auto;
         }
 
+        /* Responsive columns for smaller screens */
+        @media (max-width: 900px) {
+            .gallery {
+                column-count: 2;
+            }
+        }
+        @media (max-width: 600px) {
+            .gallery {
+                column-count: 1;
+            }
+        }
+
         /* Image Styling */
         .gallery-item {
-            overflow: hidden;
+            break-inside: avoid; /* Prevents an image from being split across columns */
+            margin-bottom: 1.5rem;
             border-radius: 4px;
             background-color: #1e1e1e;
+            overflow: hidden;
         }
+        
         .gallery-item img {
             width: 100%;
-            height: 400px; /* Forces uniform height */
-            object-fit: cover; /* Prevents image distortion */
+            height: auto; /* Allows the image to keep its original aspect ratio */
             display: block;
             transition: transform 0.4s ease, opacity 0.4s ease;
         }
+        
         .gallery-item:hover img {
             transform: scale(1.03);
             opacity: 0.9;
@@ -71,26 +84,24 @@
         <h1>Photography</h1>
         <p>Selected Works</p>
     </header>
-
-    <main class="gallery">
-        <!-- Replace the src with the paths to your actual images -->
+<main class="gallery">
         <div class="gallery-item">
-            <img src="files/images/photo1.jpeg" alt="Description of photo 1">
+            <img src="files/images/photo1.jpeg" alt="Mountain landscape at dawn" title="Mountain landscape at dawn">
         </div>
         <div class="gallery-item">
-            <img src="files/images/photo2.jpeg" alt="Description of photo 2">
+            <img src="files/images/photo2.jpeg" alt="Street photography in the city" title="Street photography in the city">
         </div>
         <div class="gallery-item">
-            <img src="files/images/photo3.jpeg" alt="Description of photo 3">
+            <img src="files/images/photo3.jpeg" alt="Macro shot of a flower" title="Macro shot of a flower">
         </div>
         <div class="gallery-item">
-            <img src="files/images/photo4.jpeg" alt="Description of photo 4">
+            <img src="files/images/photo4.jpeg" alt="Portrait in natural light" title="Portrait in natural light">
         </div>
         <div class="gallery-item">
-            <img src="files/images/photo5.jpeg" alt="Description of photo 5">
+            <img src="files/images/photo5.jpeg" alt="Abstract architectural details" title="Abstract architectural details">
         </div>
         <div class="gallery-item">
-            <img src="files/images/photo6.jpeg" alt="Description of photo 6">
+            <img src="files/images/photo6.jpeg" alt="Long exposure night traffic" title="Long exposure night traffic">
         </div>
     </main>
 
