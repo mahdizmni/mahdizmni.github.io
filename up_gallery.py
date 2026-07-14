@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import re
+import sys
 import subprocess
 
 # Configuration
@@ -8,7 +9,11 @@ IMAGE_DIR = 'files/images'
 HTML_FILE = 'photo.html'
 
 def update_html_and_push():
-    # 1. Get all images in the directory
+    # 1. Capture the custom description from command-line arguments
+    # Joins all arguments after the script name into a single string
+    custom_desc = " ".join(sys.argv[1:]) if len(sys.argv) > 1 else None
+
+    # 2. Get all images in the directory
     try:
         files = os.listdir(IMAGE_DIR)
     except FileNotFoundError:
@@ -16,24 +21,15 @@ def update_html_and_push():
         return
 
     images = [f for f in files if f.lower().endswith(('.jpeg', '.jpg', '.png', '.webp'))]
-    images.sort() # Sorts alphabetically
-
     if not images:
         print(f"No images found in {IMAGE_DIR}.")
         return
 
-    # 2. Generate the new HTML block
-    gallery_html = '<main class="gallery">\n'
-    for img in images:
-        # Create a readable title from the filename (e.g., "dark_sky.jpeg" -> "Dark Sky")
-        clean_title = os.path.splitext(img)[0].replace('-', ' ').replace('_', ' ').title()
-        
-        gallery_html += f'        <div class="gallery-item">\n'
-        gallery_html += f'            <img src="{IMAGE_DIR}/{img}" alt="{clean_title}" title="{clean_title}">\n'
-        gallery_html += f'        </div>\n'
-    gallery_html += '    </main>'
+    # Sort by the time the file was added (newest at the top)
+    images.sort(key=lambda x: os.path.getctime(os.path.join(IMAGE_DIR, x)), reverse=True)
+    newest_image = images[0] # Identify the most recently added file
 
-    # 3. Read the existing index.html
+    # 3. Read the existing index.html to preserve old descriptions
     try:
         with open(HTML_FILE, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -41,8 +37,30 @@ def update_html_and_push():
         print(f"Error: File '{HTML_FILE}' not found.")
         return
 
-    # 4. Replace the existing <main> block with the new one
-    # This regex looks for the <main class="gallery"> tag and everything inside it
+    # Extract existing descriptions using regex to prevent overwriting past data
+    existing_descriptions = {}
+    matches = re.findall(r'<img src="[^"]*/([^"]+)" alt="([^"]*)"', content)
+    for filename, alt_text in matches:
+        existing_descriptions[filename] = alt_text
+
+    # 4. Generate the new HTML block
+    gallery_html = '<main class="gallery">\n'
+    for img in images:
+        # Determine the description for this specific image
+        if img == newest_image and custom_desc:
+            desc = custom_desc
+        elif img in existing_descriptions:
+            desc = existing_descriptions[img] # Reuse old description
+        else:
+            # Fallback: clean up the filename if no description exists
+            desc = os.path.splitext(img)[0].replace('-', ' ').replace('_', ' ').title()
+        
+        gallery_html += f'        <div class="gallery-item">\n'
+        gallery_html += f'            <img src="{IMAGE_DIR}/{img}" alt="{desc}" title="{desc}">\n'
+        gallery_html += f'        </div>\n'
+    gallery_html += '    </main>'
+
+    # 5. Replace the existing <main> block
     new_content = re.sub(
         r'<main class="gallery">.*?</main>', 
         gallery_html, 
@@ -50,24 +68,25 @@ def update_html_and_push():
         flags=re.DOTALL
     )
 
-    # 5. Write the updated content back to index.html
+    # 6. Write the updated content
     with open(HTML_FILE, 'w', encoding='utf-8') as f:
         f.write(new_content)
-    print("HTML updated successfully with current images.")
+    print("HTML updated successfully.")
 
-    # 6. Execute Git commands
+    # 7. Execute Git commands
     try:
         print("Staging changes...")
         subprocess.run(['git', 'add', '.'], check=True)
         
-        # Check if there are actually changes to commit
         status = subprocess.run(['git', 'status', '--porcelain'], capture_output=True, text=True)
         if not status.stdout.strip():
             print("No changes to commit. Everything is up to date.")
             return
 
         print("Committing changes...")
-        subprocess.run(['git', 'commit', '-m', 'Auto-update gallery images'], check=True)
+        # Make the git commit message dynamic based on whether you added a description
+        commit_msg = f"Add new photo: {custom_desc}" if custom_desc else "Auto-update gallery images"
+        subprocess.run(['git', 'commit', '-m', commit_msg], check=True)
         
         print("Pushing to GitHub...")
         subprocess.run(['git', 'push'], check=True)
