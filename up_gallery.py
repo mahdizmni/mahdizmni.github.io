@@ -13,7 +13,7 @@ except ImportError:
 # Configuration
 IMAGE_DIR = 'files/images'
 THUMB_DIR = 'files/thumbnails'
-HTML_FILE = 'photo.html'
+HTML_FILE = 'photos.html'
 MAX_THUMB_SIZE = (800, 800) # Maximum width/height for thumbnails
 
 def create_thumbnail(img_name):
