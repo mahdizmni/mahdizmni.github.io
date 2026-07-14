@@ -10,7 +10,6 @@ HTML_FILE = 'photo.html'
 
 def update_html_and_push():
     # 1. Capture the custom description from command-line arguments
-    # Joins all arguments after the script name into a single string
     custom_desc = " ".join(sys.argv[1:]) if len(sys.argv) > 1 else None
 
     # 2. Get all images in the directory
@@ -25,9 +24,9 @@ def update_html_and_push():
         print(f"No images found in {IMAGE_DIR}.")
         return
 
-    # Sort by the time the file was added (newest at the top)
-    images.sort(key=lambda x: os.path.getctime(os.path.join(IMAGE_DIR, x)), reverse=True)
-    newest_image = images[0] # Identify the most recently added file
+    # Sort by the time the file was added (oldest at the top, newest at the END)
+    images.sort(key=lambda x: os.path.getctime(os.path.join(IMAGE_DIR, x)))
+    newest_image = images[-1] # The newest file is now the last item in the list
 
     # 3. Read the existing index.html to preserve old descriptions
     try:
@@ -84,7 +83,6 @@ def update_html_and_push():
             return
 
         print("Committing changes...")
-        # Make the git commit message dynamic based on whether you added a description
         commit_msg = f"Add new photo: {custom_desc}" if custom_desc else "Auto-update gallery images"
         subprocess.run(['git', 'commit', '-m', commit_msg], check=True)
         
